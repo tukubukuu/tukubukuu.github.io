@@ -11,24 +11,26 @@
             margin: 0;
             padding: 0;
             background-color: #f8f8f8;
+            overflow-x: hidden; /* Menyembunyikan scrollbar horizontal */
         }
 
         .container {
-            width: 80%;
+            width: 90%;
             margin: 20px auto;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
+            overflow: hidden; /* Mencegah gambar latar belakang keluar dari kontainer */
         }
 
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 36px;
+            font-size: 28px;
             color: #000282;
-            text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
         }
 
         #book-list {
@@ -50,7 +52,6 @@
         }
 
         .book-info {
-            flex-grow: 1;
             display: flex;
             align-items: center;
         }
@@ -62,16 +63,15 @@
             border-radius: 8px;
         }
 
-        .book-info span {
+        .book-info div {
             color: #586fa5;
-            font-weight: bold;
-            font-size: 18px;
         }
 
-        .book-info p {
-            color: #586fa5;
+        .book-info span {
+            font-weight: bold;
             font-size: 16px;
-            margin-top: 5px;
+            display: block;
+            margin-bottom: 5px;
         }
 
         .book-item button {
@@ -132,9 +132,9 @@
                     <div class="book-info">
                         <img src="${book.image}" alt="${book.title}">
                         <div>
-                            <span>${book.title}</span><br>
-                            <span>by ${book.author}</span><br>
-                            <span>${book.description}</span><br>
+                            <span>${book.title}</span>
+                            <span>by ${book.author}</span>
+                            <span>${book.description}</span>
                             <span>Rp ${book.price}</span>
                         </div>
                     </div>
