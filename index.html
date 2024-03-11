@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASMINE BOOK STORE</title>
+    <style>
+        /* Style CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffffbb;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #f0f0f0; /* Color changed */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 32px;
+            animation: blink 1s infinite alternate; /* Animasi berkelap-kelip */
+        }
+
+        @keyframes blink {
+            0% {opacity: 1;}
+            100% {opacity: 0.5;}
+        }
+
+        #book-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .book-item {
+            border-bottom: 1px solid #ccc;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .book-info {
+            flex-grow: 1;
+        }
+
+        .book-info span {
+            color: #4b0082; /* Color changed */
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .book-info p {
+            color: #800080; /* Color changed */
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .book-item button {
+            padding: 8px 16px;
+            background-color: #ffa500; /* Color changed */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-item button:hover {
+            background-color: #ff8c00; /* Color changed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MINE BOOKS</h1>
+        <ul id="book-list">
+            <!-- List buku akan ditampilkan disini -->
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript
+        const books = [
+            { title: 'Sistem Informasi Manajemen Pendidikan', author: 'Dr.  Eti  Rochaety', price: 62000, description: 'SECOND' },
+            { title: 'Manajemen Sumber Daya Manusia', author: 'Prof. Dr. Hj. Sedamayanti, M.Pd., APU', price: 150000, description: 'SECOND' },
+            { title: 'Manajemen Mutu Pendidikan', author: 'Jejen Musfah', price: 95000, description: 'NEW' }
+            // Anda dapat menambahkan buku lainnya di sini
+        ];
+
+        const bookList = document.getElementById('book-list');
+
+        // Fungsi untuk menampilkan daftar buku
+        function renderBooks() {
+            bookList.innerHTML = '';
+            books.forEach(book => {
+                const li = document.createElement('li');
+                li.classList.add('book-item');
+                li.innerHTML = `
+                    <div class="book-info">
+                        <span style="color: #2f4f4f">${book.title} by ${book.author}</span> <!-- Color changed -->
+                        <p>${book.description}</p>
+                        <p style="color: #8b0000">Rp ${book.price}</p> <!-- Color changed -->
+                    </div>
+                    <button onclick="addToCart('${book.title}', ${book.price})" style="background-color: #008080">Order via WhatsApp</button> <!-- Color changed -->
+                `;
+                bookList.appendChild(li);
+            });
+        }
+
+        // Fungsi untuk menambahkan buku ke keranjang belanja
+        function addToCart(title, price) {
+            const phoneNumber = '+6285249569578'; // 
+            const message = `Saya ingin memesan buku ${title} dengan harga Rp ${price}.`;
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Panggil fungsi renderBooks untuk menampilkan daftar buku
+        renderBooks();
+    </script>
+</body>
+</html>
