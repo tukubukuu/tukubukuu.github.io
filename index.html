@@ -10,28 +10,25 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffffbb;
+            background-color: #f8f8f8;
         }
 
         .container {
             width: 80%;
             margin: 20px auto;
-            background-color: #f0f0f0; /* Color changed */
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 32px;
-            animation: blink 1s infinite alternate; /* Animasi berkelap-kelip */
-        }
-
-        @keyframes blink {
-            0% {opacity: 1;}
-            100% {opacity: 0.5;}
+            font-size: 36px;
+            color: #000282;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
         }
 
         #book-list {
@@ -40,58 +37,86 @@
         }
 
         .book-item {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #e6e6e6;
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-item:hover {
+            background-color: #f9f9f9;
         }
 
         .book-info {
             flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .book-info img {
+            max-width: 100px;
+            max-height: 150px;
+            margin-right: 20px;
+            border-radius: 8px;
         }
 
         .book-info span {
-            color: #4b0082; /* Color changed */
+            color: #586fa5;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .book-info p {
-            color: #800080; /* Color changed */
-            font-size: 14px;
+            color: #586fa5;
+            font-size: 16px;
             margin-top: 5px;
         }
 
         .book-item button {
-            padding: 8px 16px;
-            background-color: #ffa500; /* Color changed */
+            padding: 10px 20px;
+            background-color: #24211d;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .book-item button:hover {
-            background-color: #ff8c00; /* Color changed */
+            background-color: #a6998a;
+        }
+
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(5px);
+            z-index: -1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>MINE BOOKS</h1>
+        <h1>JASMINE BOOK STORE</h1>
         <ul id="book-list">
             <!-- List buku akan ditampilkan disini -->
         </ul>
     </div>
+    <div class="background-pattern"></div>
 
     <script>
         // JavaScript
         const books = [
-            { title: 'Sistem Informasi Manajemen Pendidikan', author: 'Dr.  Eti  Rochaety', price: 62000, description: 'SECOND' },
-            { title: 'Manajemen Sumber Daya Manusia', author: 'Prof. Dr. Hj. Sedamayanti, M.Pd., APU', price: 150000, description: 'SECOND' },
-            { title: 'Manajemen Mutu Pendidikan', author: 'Jejen Musfah', price: 95000, description: 'NEW' }
+            { title: 'Sistem Informasi Manajemen Pendidikan', author: 'Dr. Eti Rochaety', price: 62000, description: 'SECOND', image: 'WhatsApp Image 2024-03-12 at 00.13.07_fb5fedc0.jpg' },
+            { title: 'Manajemen Sumber Daya Manusia', author: 'Prof. Dr. Hj. Sedamayanti, M.Pd., APU', price: 150000, description: 'SECOND', image: 'WhatsApp Image 2024-03-12 at 00.13.08_ae2118cc.jpg' },
+            { title: 'Manajemen Mutu Pendidikan', author: 'Jejen Musfah', price: 95000, description: 'NEW', image: 'WhatsApp Image 2024-03-12 at 00.13.07_aed1ed9a.jpg' }
             // Anda dapat menambahkan buku lainnya di sini
         ];
 
@@ -105,11 +130,15 @@
                 li.classList.add('book-item');
                 li.innerHTML = `
                     <div class="book-info">
-                        <span style="color: #2f4f4f">${book.title} by ${book.author}</span> <!-- Color changed -->
-                        <p>${book.description}</p>
-                        <p style="color: #8b0000">Rp ${book.price}</p> <!-- Color changed -->
+                        <img src="${book.image}" alt="${book.title}">
+                        <div>
+                            <span>${book.title}</span><br>
+                            <span>by ${book.author}</span><br>
+                            <span>${book.description}</span><br>
+                            <span>Rp ${book.price}</span>
+                        </div>
                     </div>
-                    <button onclick="addToCart('${book.title}', ${book.price})" style="background-color: #008080">Order via WhatsApp</button> <!-- Color changed -->
+                    <button onclick="addToCart('${book.title}', ${book.price})">Order via WhatsApp</button>
                 `;
                 bookList.appendChild(li);
             });
@@ -117,7 +146,7 @@
 
         // Fungsi untuk menambahkan buku ke keranjang belanja
         function addToCart(title, price) {
-            const phoneNumber = '+6285249569578'; // 
+            const phoneNumber = '+6285249569578';
             const message = `Saya ingin memesan buku ${title} dengan harga Rp ${price}.`;
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
